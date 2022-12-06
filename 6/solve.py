@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 def first_marker(problem_input, num_unique):
-    for i in range(num_unique, len(problem_input)):
+    for i in range(num_unique, len(problem_input) + 1):
         if len(set(problem_input[i - num_unique:i])) == num_unique:
             return i
     assert False, 'No marker found'
