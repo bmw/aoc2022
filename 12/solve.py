@@ -11,10 +11,11 @@ def find_locations(elevation_map, value):
 def bfs_to_end(elevation_map, start):
     visited = set((start,))
     i = 0
-    paths = [(start, 0)]
-    next_paths = []
-    while i < len(paths):
-        (x, y), num_steps = paths[i]
+    locations = [start]
+    next_locations = []
+    num_steps = 0
+    while i < len(locations):
+        x, y = locations[i]
         c = elevation_map[x][y]
         if c == 'E':
             return num_steps
@@ -29,11 +30,12 @@ def bfs_to_end(elevation_map, start):
                     new_c = 'z'
                 if new_tuple not in visited and ord(new_c) <= ord(c) + 1:
                     visited.add(new_tuple)
-                    next_paths.append(((new_x, new_y), num_steps + 1))
+                    next_locations.append((new_x, new_y))
         i += 1
-        if i >= len(paths):
+        if i >= len(locations):
             i = 0
-            paths, next_paths = next_paths, []
+            locations, next_locations = next_locations, []
+            num_steps += 1
     return float('inf')
 
 def part1(elevation_map):
