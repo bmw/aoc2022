@@ -14,10 +14,8 @@ def compare(l1, l2):
     while i < min(len(l1), len(l2)):
         v1, v2 = l1[i], l2[i]
         if isinstance(v1, int) and isinstance(v2, int):
-            if v1 < v2:
-                return -1
-            elif v1 > v2:
-                return 1
+            if v1 - v2 != 0:
+                return v1 - v2
         else:
             if isinstance(v1, int):
                 v1 = [v1]
@@ -27,17 +25,12 @@ def compare(l1, l2):
             if result != 0:
                 return result
         i += 1
-    if len(l1) < len(l2):
-        return -1
-    elif len(l1) > len(l2):
-        return 1
-    else:
-        return 0
+    return len(l1) - len(l2)
 
 def part1(puzzle_input):
     ans = 0
     for i, (l1, l2) in enumerate(list_pairs(puzzle_input), 1):
-        if compare(l1, l2) == -1:
+        if compare(l1, l2) < 0:
             ans += i
     return ans
 
